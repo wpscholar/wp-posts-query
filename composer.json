@@ -1,0 +1,16 @@
+{
+    "name": "wpscholar/wp-posts-query",
+    "description": "A class for fetching WordPress posts that handles caching automatically and simplifies looping.",
+    "license": "GPL-2.0+",
+    "authors": [
+        {
+            "name": "Micah Wood",
+            "email": "micah@wpscholar.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "wpscholar\\WordPress\\": ""
+        }
+    }
+}
