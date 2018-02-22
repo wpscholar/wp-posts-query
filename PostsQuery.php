@@ -31,6 +31,13 @@ class PostsQuery implements \Countable, \IteratorAggregate {
 	];
 
 	/**
+	 * WP_Query object query_vars to retain in the cache
+	 *
+	 * @var array
+	 */
+	public $cached_query_vars = [];
+
+	/**
 	 * @var \WP_Query
 	 */
 	public $query;
@@ -61,7 +68,11 @@ class PostsQuery implements \Countable, \IteratorAggregate {
 				$pseudoQuery[ $property ] = $query->$property;
 			}
 
-			wp_cache_set( $cache_key, (object) $pseudoQuery, '', $this->cache_expiration );
+			foreach ( $this->cached_query_vars as $queryVar ) {
+				$pseudoQuery['query_vars'][ $queryVar ] = $query->get( $queryVar );
+			}
+
+			wp_cache_set( $cache_key, new PseudoQuery( $pseudoQuery ), '', $this->cache_expiration );
 		}
 
 		$this->query = $query;
