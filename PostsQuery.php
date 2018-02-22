@@ -53,7 +53,7 @@ class PostsQuery implements \Countable, \IteratorAggregate {
 
 		$query_args = wp_parse_args( $args );
 
-		ksort( $query_args );
+		ksort( $query_args, SORT_STRING );
 
 		$cache_key = md5( __METHOD__ . '?' . http_build_query( $query_args, null, '&' ) );
 
